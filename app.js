@@ -1,10 +1,11 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const Campground = require("./models/campground");
+const HikingTrail = require("./models/hikingtrail");
 
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
+mongoose.connect("mongodb://127.0.0.1:27017/hiking-trail");
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -14,6 +15,7 @@ db.once("open", () => {
 
 const app = express();
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -24,43 +26,43 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/campgrounds", async (req, res) => {
-  const campgrounds = await Campground.find({});
-  res.render("campgrounds/index", { campgrounds });
+app.get("/hikingtrails", async (req, res) => {
+  const hikingtrails = await HikingTrail.find({});
+  res.render("hikingtrails/index", { hikingtrails });
 });
 
-app.get("/campgrounds/new", (req, res) => {
-  res.render("campgrounds/new");
+app.get("/hikingtrails/new", (req, res) => {
+  res.render("hikingtrails/new");
 });
 
-app.post("/campgrounds", async (req, res) => {
-  const campground = new Campground(req.body.campground);
-  await campground.save();
-  res.redirect(`/campgrounds/${campground._id}`);
+app.post("/hikingtrails", async (req, res) => {
+  const hikingtrail = new HikingTrail(req.body.hikingtrail);
+  await hikingtrail.save();
+  res.redirect(`/hikingtrails/${hikingtrail._id}`);
 });
 
-app.get("/campgrounds/:id", async (req, res) => {
-  const campground = await Campground.findById(req.params.id);
-  res.render("campgrounds/show", { campground });
+app.get("/hikingtrails/:id", async (req, res) => {
+  const hikingtrail = await HikingTrail.findById(req.params.id);
+  res.render("hikingtrails/show", { hikingtrail });
 });
 
-app.get("/campgrounds/:id/edit", async (req, res) => {
-  const campground = await Campground.findById(req.params.id);
-  res.render("campgrounds/edit", { campground });
+app.get("/hikingtrails/:id/edit", async (req, res) => {
+  const hikingtrail = await HikingTrail.findById(req.params.id);
+  res.render("hikingtrails/edit", { hikingtrail });
 });
 
-app.put("/campgrounds/:id", async (req, res) => {
+app.put("/hikingtrails/:id", async (req, res) => {
   const { id } = req.params;
-  const campground = await Campground.findByIdAndUpdate(id, {
-    ...req.body.campground,
+  const hikingtrail = await HikingTrail.findByIdAndUpdate(id, {
+    ...req.body.hikingtrail,
   });
-  res.redirect(`/campgrounds/${campground._id}`);
+  res.redirect(`/hikingtrails/${hikingtrail._id}`);
 });
 
-app.delete("/campgrounds/:id", async (req, res) => {
+app.delete("/hikingtrails/:id", async (req, res) => {
   const { id } = req.params;
-  await Campground.findByIdAndDelete(id);
-  res.redirect("/campgrounds");
+  await HikingTrail.findByIdAndDelete(id);
+  res.redirect("/hikingtrails");
 });
 
 app.listen(3000, () => {
