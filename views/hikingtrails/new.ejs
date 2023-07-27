@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">New Hiking Trail</h1>
   <div class="col-6 offset-3">
-    <form action="/hikingtrails" method="POST">
+    <form
+      action="/hikingtrails"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -10,7 +15,9 @@
           type="text"
           id="title"
           name="hikingtrail[title]"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
@@ -19,7 +26,9 @@
           type="text"
           id="location"
           name="hikingtrail[location]"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image Url</label>
@@ -28,7 +37,9 @@
           type="text"
           id="image"
           name="hikingtrail[image]"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Expense</label>
@@ -42,8 +53,10 @@
             aria-label="price"
             aria-describedby="price-label"
             name="hikingtrail[price]"
+            required
           />
         </div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
 
       <div class="mb-3">
@@ -53,7 +66,9 @@
           type="text"
           id="description"
           name="hikingtrail[description]"
+          required
         ></textarea>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">Add Hiking Trail</button>

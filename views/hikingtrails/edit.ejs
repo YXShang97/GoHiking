@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">Edit Hiking Trail</h1>
   <div class="col-6 offset-3">
-    <form action="/hikingtrails/<%=hikingtrail._id%>?_method=PUT" method="POST">
+    <form
+      action="/hikingtrails/<%=hikingtrail._id%>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -11,7 +16,9 @@
           id="title"
           name="hikingtrail[title]"
           value="<%=hikingtrail.title %>"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
@@ -21,7 +28,9 @@
           id="location"
           name="hikingtrail[location]"
           value="<%=hikingtrail.location %>"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image Url</label>
@@ -31,7 +40,9 @@
           id="image"
           name="hikingtrail[image]"
           value="<%=hikingtrail.image %>"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Expense</label>
@@ -46,7 +57,9 @@
             aria-describedby="price-label"
             name="hikingtrail[price]"
             value="<%=hikingtrail.price %>"
-          />
+            required
+          />\
+          <div class="valid-feedback">Looks good!</div>
         </div>
       </div>
 
@@ -57,9 +70,11 @@
           type="text"
           id="description"
           name="hikingtrail[description]"
+          required
         >
 <%= hikingtrail.description%></textarea
         >
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Hiking Trail</button>
