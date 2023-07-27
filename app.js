@@ -6,6 +6,7 @@ const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const HikingTrail = require("./models/hikingtrail");
+const { hikingtrailSchema } = require("./schemas");
 
 mongoose.connect("mongodb://127.0.0.1:27017/hiking-trail");
 
@@ -23,6 +24,16 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+const validateHikingTrail = (req, res, next) => {
+  const { error } = hikingtrailSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -42,6 +53,7 @@ app.get("/hikingtrails/new", (req, res) => {
 
 app.post(
   "/hikingtrails",
+  validateHikingTrail,
   catchAsync(async (req, res) => {
     const hikingtrail = new HikingTrail(req.body.hikingtrail);
     await hikingtrail.save();
@@ -67,6 +79,7 @@ app.get(
 
 app.put(
   "/hikingtrails/:id",
+  validateHikingTrail,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const hikingtrail = await HikingTrail.findByIdAndUpdate(id, {
