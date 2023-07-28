@@ -6,7 +6,8 @@ const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const HikingTrail = require("./models/hikingtrail");
-const { hikingtrailSchema } = require("./schemas");
+const Review = require("./models/review");
+const { hikingtrailSchema, reviewSchema } = require("./schemas");
 
 mongoose.connect("mongodb://127.0.0.1:27017/hiking-trail");
 
@@ -27,6 +28,16 @@ app.use(methodOverride("_method"));
 
 const validateHikingTrail = (req, res, next) => {
   const { error } = hikingtrailSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
@@ -64,7 +75,9 @@ app.post(
 app.get(
   "/hikingtrails/:id",
   catchAsync(async (req, res) => {
-    const hikingtrail = await HikingTrail.findById(req.params.id);
+    const hikingtrail = await HikingTrail.findById(req.params.id).populate(
+      "reviews"
+    );
     res.render("hikingtrails/show", { hikingtrail });
   })
 );
@@ -95,6 +108,29 @@ app.delete(
     const { id } = req.params;
     await HikingTrail.findByIdAndDelete(id);
     res.redirect("/hikingtrails");
+  })
+);
+
+app.post(
+  "/hikingtrails/:id/reviews",
+  validateReview,
+  catchAsync(async (req, res) => {
+    const hikingtrail = await HikingTrail.findById(req.params.id);
+    const review = new Review(req.body.review);
+    hikingtrail.reviews.push(review);
+    await review.save();
+    await hikingtrail.save();
+    res.redirect(`/hikingtrails/${hikingtrail._id}`);
+  })
+);
+
+app.delete(
+  "/hikingtrails/:id/reviews/:reviewId",
+  catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await HikingTrail.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/hikingtrails/${id}`);
   })
 );
 
