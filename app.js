@@ -1,10 +1,14 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate");
+const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
-const Campground = require("./models/campground");
+const HikingTrail = require("./models/hikingtrail");
+const { hikingtrailSchema } = require("./schemas");
 
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
+mongoose.connect("mongodb://127.0.0.1:27017/hiking-trail");
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -14,53 +18,94 @@ db.once("open", () => {
 
 const app = express();
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+const validateHikingTrail = (req, res, next) => {
+  const { error } = hikingtrailSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/campgrounds", async (req, res) => {
-  const campgrounds = await Campground.find({});
-  res.render("campgrounds/index", { campgrounds });
+app.get(
+  "/hikingtrails",
+  catchAsync(async (req, res) => {
+    const hikingtrails = await HikingTrail.find({});
+    res.render("hikingtrails/index", { hikingtrails });
+  })
+);
+
+app.get("/hikingtrails/new", (req, res) => {
+  res.render("hikingtrails/new");
 });
 
-app.get("/campgrounds/new", (req, res) => {
-  res.render("campgrounds/new");
+app.post(
+  "/hikingtrails",
+  validateHikingTrail,
+  catchAsync(async (req, res) => {
+    const hikingtrail = new HikingTrail(req.body.hikingtrail);
+    await hikingtrail.save();
+    res.redirect(`/hikingtrails/${hikingtrail._id}`);
+  })
+);
+
+app.get(
+  "/hikingtrails/:id",
+  catchAsync(async (req, res) => {
+    const hikingtrail = await HikingTrail.findById(req.params.id);
+    res.render("hikingtrails/show", { hikingtrail });
+  })
+);
+
+app.get(
+  "/hikingtrails/:id/edit",
+  catchAsync(async (req, res) => {
+    const hikingtrail = await HikingTrail.findById(req.params.id);
+    res.render("hikingtrails/edit", { hikingtrail });
+  })
+);
+
+app.put(
+  "/hikingtrails/:id",
+  validateHikingTrail,
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const hikingtrail = await HikingTrail.findByIdAndUpdate(id, {
+      ...req.body.hikingtrail,
+    });
+    res.redirect(`/hikingtrails/${hikingtrail._id}`);
+  })
+);
+
+app.delete(
+  "/hikingtrails/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await HikingTrail.findByIdAndDelete(id);
+    res.redirect("/hikingtrails");
+  })
+);
+
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
 });
 
-app.post("/campgrounds", async (req, res) => {
-  const campground = new Campground(req.body.campground);
-  await campground.save();
-  res.redirect(`/campgrounds/${campground._id}`);
-});
-
-app.get("/campgrounds/:id", async (req, res) => {
-  const campground = await Campground.findById(req.params.id);
-  res.render("campgrounds/show", { campground });
-});
-
-app.get("/campgrounds/:id/edit", async (req, res) => {
-  const campground = await Campground.findById(req.params.id);
-  res.render("campgrounds/edit", { campground });
-});
-
-app.put("/campgrounds/:id", async (req, res) => {
-  const { id } = req.params;
-  const campground = await Campground.findByIdAndUpdate(id, {
-    ...req.body.campground,
-  });
-  res.redirect(`/campgrounds/${campground._id}`);
-});
-
-app.delete("/campgrounds/:id", async (req, res) => {
-  const { id } = req.params;
-  await Campground.findByIdAndDelete(id);
-  res.redirect("/campgrounds");
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Oh No, Something Went Wrong!";
+  res.status(statusCode).render("error", { err });
 });
 
 app.listen(3000, () => {
