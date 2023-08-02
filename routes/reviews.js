@@ -26,6 +26,7 @@ router.post(
     hikingtrail.reviews.push(review);
     await review.save();
     await hikingtrail.save();
+    req.flash("success", "Created new review!");
     res.redirect(`/hikingtrails/${hikingtrail._id}`);
   })
 );
@@ -36,6 +37,7 @@ router.delete(
     const { id, reviewId } = req.params;
     await HikingTrail.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
+    req.flash("success", "Successfully deleted review!");
     res.redirect(`/hikingtrails/${id}`);
   })
 );

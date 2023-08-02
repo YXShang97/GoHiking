@@ -34,6 +34,7 @@ router.post(
   catchAsync(async (req, res) => {
     const hikingtrail = new HikingTrail(req.body.hikingtrail);
     await hikingtrail.save();
+    req.flash("success", "Successfully made a new hiking trail!");
     res.redirect(`/hikingtrails/${hikingtrail._id}`);
   })
 );
@@ -44,6 +45,10 @@ router.get(
     const hikingtrail = await HikingTrail.findById(req.params.id).populate(
       "reviews"
     );
+    if (!hikingtrail) {
+      req.flash("error", "Cannot find the hiking trail!");
+      return res.redirect("/hikingtrails");
+    }
     res.render("hikingtrails/show", { hikingtrail });
   })
 );
@@ -52,6 +57,10 @@ router.get(
   "/:id/edit",
   catchAsync(async (req, res) => {
     const hikingtrail = await HikingTrail.findById(req.params.id);
+    if (!hikingtrail) {
+      req.flash("error", "Cannot find the hiking trail!");
+      return res.redirect("/hikingtrails");
+    }
     res.render("hikingtrails/edit", { hikingtrail });
   })
 );
@@ -64,6 +73,7 @@ router.put(
     const hikingtrail = await HikingTrail.findByIdAndUpdate(id, {
       ...req.body.hikingtrail,
     });
+    req.flash("success", "Successfully updated hiking trail!");
     res.redirect(`/hikingtrails/${hikingtrail._id}`);
   })
 );
@@ -73,6 +83,7 @@ router.delete(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await HikingTrail.findByIdAndDelete(id);
+    req.flash("success", "Successfully deleted hiking trail!");
     res.redirect("/hikingtrails");
   })
 );
