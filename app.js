@@ -2,12 +2,11 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
-const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
-const HikingTrail = require("./models/hikingtrail");
-const Review = require("./models/review");
-const { hikingtrailSchema, reviewSchema } = require("./schemas");
+
+const hikingtrails = require("./routes/hikingtrails");
+const reviews = require("./routes/reviews");
 
 mongoose.connect("mongodb://127.0.0.1:27017/hiking-trail");
 
@@ -26,113 +25,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-const validateHikingTrail = (req, res, next) => {
-  const { error } = hikingtrailSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
-
-const validateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
-
-app.get("/", (req, res) => {
-  res.render("home");
-});
-
-app.get(
-  "/hikingtrails",
-  catchAsync(async (req, res) => {
-    const hikingtrails = await HikingTrail.find({});
-    res.render("hikingtrails/index", { hikingtrails });
-  })
-);
-
-app.get("/hikingtrails/new", (req, res) => {
-  res.render("hikingtrails/new");
-});
-
-app.post(
-  "/hikingtrails",
-  validateHikingTrail,
-  catchAsync(async (req, res) => {
-    const hikingtrail = new HikingTrail(req.body.hikingtrail);
-    await hikingtrail.save();
-    res.redirect(`/hikingtrails/${hikingtrail._id}`);
-  })
-);
-
-app.get(
-  "/hikingtrails/:id",
-  catchAsync(async (req, res) => {
-    const hikingtrail = await HikingTrail.findById(req.params.id).populate(
-      "reviews"
-    );
-    res.render("hikingtrails/show", { hikingtrail });
-  })
-);
-
-app.get(
-  "/hikingtrails/:id/edit",
-  catchAsync(async (req, res) => {
-    const hikingtrail = await HikingTrail.findById(req.params.id);
-    res.render("hikingtrails/edit", { hikingtrail });
-  })
-);
-
-app.put(
-  "/hikingtrails/:id",
-  validateHikingTrail,
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const hikingtrail = await HikingTrail.findByIdAndUpdate(id, {
-      ...req.body.hikingtrail,
-    });
-    res.redirect(`/hikingtrails/${hikingtrail._id}`);
-  })
-);
-
-app.delete(
-  "/hikingtrails/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await HikingTrail.findByIdAndDelete(id);
-    res.redirect("/hikingtrails");
-  })
-);
-
-app.post(
-  "/hikingtrails/:id/reviews",
-  validateReview,
-  catchAsync(async (req, res) => {
-    const hikingtrail = await HikingTrail.findById(req.params.id);
-    const review = new Review(req.body.review);
-    hikingtrail.reviews.push(review);
-    await review.save();
-    await hikingtrail.save();
-    res.redirect(`/hikingtrails/${hikingtrail._id}`);
-  })
-);
-
-app.delete(
-  "/hikingtrails/:id/reviews/:reviewId",
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await HikingTrail.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/hikingtrails/${id}`);
-  })
-);
+app.use("/hikingtrails", hikingtrails);
+app.use("/hikingtrails/:id/reviews", reviews);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
