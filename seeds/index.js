@@ -22,10 +22,20 @@ const seedDB = async () => {
       author: "64cafcc1959a8338f6b08520",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: "https://source.unsplash.com/collection/371513",
+      // image: "https://source.unsplash.com/collection/371513",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia nesciunt eos facilis quo laboriosam earum libero vero neque laudantium? Alias saepe deserunt distinctio. Quidem iure cum tenetur praesentium iusto voluptas?",
       price: price,
+      images: [
+        {
+          url: "https://res.cloudinary.com/dxs1ss1av/image/upload/v1691082564/GoHiking/vjjigeucuj7vjwkrrmxp.jpg",
+          filename: "GoHiking/vjjigeucuj7vjwkrrmxp",
+        },
+        {
+          url: "https://res.cloudinary.com/dxs1ss1av/image/upload/v1691082564/GoHiking/drelleonh9npx6wmjgdn.jpg",
+          filename: "GoHiking/drelleonh9npx6wmjgdn",
+        },
+      ],
     });
     await trail.save();
   }

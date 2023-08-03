@@ -1,5 +1,6 @@
 const { model } = require("mongoose");
 const HikingTrail = require("../models/hikingtrail");
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res) => {
   const hikingtrails = await HikingTrail.find({});
@@ -12,6 +13,12 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createHikingTrail = async (req, res) => {
   const hikingtrail = new HikingTrail(req.body.hikingtrail);
+  // console.log(req.files);
+  hikingtrail.images = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
+  // console.log(hikingtrail);
   hikingtrail.author = req.user._id;
   await hikingtrail.save();
   req.flash("success", "Successfully made a new hiking trail!");
@@ -48,6 +55,22 @@ module.exports.updateHikingTrail = async (req, res) => {
   const hikingtrail = await HikingTrail.findByIdAndUpdate(id, {
     ...req.body.hikingtrail,
   });
+  // console.log(req.files);
+  const imgs = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
+
+  hikingtrail.images.push(...imgs);
+  await hikingtrail.save();
+  if (req.body.deleteImages) {
+    for (let filename of req.body.deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    await hikingtrail.updateOne({
+      $pull: { images: { filename: { $in: req.body.deleteImages } } },
+    });
+  }
   req.flash("success", "Successfully updated hiking trail!");
   res.redirect(`/hikingtrails/${hikingtrail._id}`);
 };

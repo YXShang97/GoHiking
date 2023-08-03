@@ -3,6 +3,9 @@ const router = express.Router();
 const hikingtrails = require("../controllers/hikingtrails");
 const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn, isAuthor, validateHikingTrail } = require("../middleware");
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 const HikingTrail = require("../models/hikingtrail");
 
@@ -11,6 +14,7 @@ router
   .get(catchAsync(hikingtrails.index))
   .post(
     isLoggedIn,
+    upload.array("image"),
     validateHikingTrail,
     catchAsync(hikingtrails.createHikingTrail)
   );
@@ -23,7 +27,8 @@ router
   .put(
     isLoggedIn,
     isAuthor,
-    validateHikingTrail,
+    upload.array("image"),
+    // validateHikingTrail,
     catchAsync(hikingtrails.updateHikingTrail)
   )
   .delete(isLoggedIn, isAuthor, catchAsync(hikingtrails.deleteHikingTrail));
