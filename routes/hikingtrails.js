@@ -1,21 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
-const { hikingtrailSchema } = require("../schemas");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, isAuthor, validateHikingTrail } = require("../middleware");
 
-const ExpressError = require("../utils/ExpressError");
 const HikingTrail = require("../models/hikingtrail");
-
-const validateHikingTrail = (req, res, next) => {
-  const { error } = hikingtrailSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
 
 router.get(
   "/",
@@ -35,6 +23,7 @@ router.post(
   validateHikingTrail,
   catchAsync(async (req, res) => {
     const hikingtrail = new HikingTrail(req.body.hikingtrail);
+    hikingtrail.author = req.user._id;
     await hikingtrail.save();
     req.flash("success", "Successfully made a new hiking trail!");
     res.redirect(`/hikingtrails/${hikingtrail._id}`);
@@ -44,9 +33,14 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
-    const hikingtrail = await HikingTrail.findById(req.params.id).populate(
-      "reviews"
-    );
+    const hikingtrail = await HikingTrail.findById(req.params.id)
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "author",
+        },
+      })
+      .populate("author");
     if (!hikingtrail) {
       req.flash("error", "Cannot find the hiking trail!");
       return res.redirect("/hikingtrails");
@@ -58,6 +52,7 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const hikingtrail = await HikingTrail.findById(req.params.id);
     if (!hikingtrail) {
@@ -71,6 +66,7 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  isAuthor,
   validateHikingTrail,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -85,6 +81,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await HikingTrail.findByIdAndDelete(id);
