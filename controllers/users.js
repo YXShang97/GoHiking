@@ -1,4 +1,4 @@
-const { model } = require("mongoose");
+const express = require("express");
 const User = require("../models/user");
 
 module.exports.renderRegister = (req, res) => {
