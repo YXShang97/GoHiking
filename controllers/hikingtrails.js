@@ -1,6 +1,8 @@
-const { model } = require("mongoose");
 const HikingTrail = require("../models/hikingtrail");
 const { cloudinary } = require("../cloudinary");
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
   const hikingtrails = await HikingTrail.find({});
@@ -12,7 +14,14 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createHikingTrail = async (req, res) => {
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: req.body.hikingtrail.location,
+      limit: 1,
+    })
+    .send();
   const hikingtrail = new HikingTrail(req.body.hikingtrail);
+  hikingtrail.geometry = geoData.body.features[0].geometry;
   // console.log(req.files);
   hikingtrail.images = req.files.map((f) => ({
     url: f.path,
