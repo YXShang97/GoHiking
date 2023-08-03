@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const { hikingtrailSchema } = require("../schemas");
+const { isLoggedIn } = require("../middleware");
 
 const ExpressError = require("../utils/ExpressError");
 const HikingTrail = require("../models/hikingtrail");
@@ -24,12 +25,13 @@ router.get(
   })
 );
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("hikingtrails/new");
 });
 
 router.post(
   "/",
+  isLoggedIn,
   validateHikingTrail,
   catchAsync(async (req, res) => {
     const hikingtrail = new HikingTrail(req.body.hikingtrail);
@@ -55,6 +57,7 @@ router.get(
 
 router.get(
   "/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const hikingtrail = await HikingTrail.findById(req.params.id);
     if (!hikingtrail) {
@@ -67,6 +70,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateHikingTrail,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -80,6 +84,7 @@ router.put(
 
 router.delete(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await HikingTrail.findByIdAndDelete(id);
