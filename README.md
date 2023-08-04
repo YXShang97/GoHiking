@@ -16,9 +16,7 @@ This is a project to learn and practice full stack web development. Project orig
     <li>
       <a href="#built-with-">Built With</a>
     </li>
-    <li>
-    </li>
-        <a href="#features-">Features</a>
+    <li><a href="#features-">Features</a></li>
     <li>
       <a href="#getting-started-">Getting Started</a>
     </li>
@@ -90,6 +88,10 @@ SECRET=
 
 Start the app and open the default (http://localhost:3000) to register an initial user.
 
+```
+nodemon app.js
+```
+
 Open MongoDB Shell (`mongosh`) and run the following commands to retrieve the user's `ObjectID`
 
 ```
@@ -107,13 +109,10 @@ node seeds/index.js
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Running App &#x1F680;
-
-1. Run MongoDB via `mongod.exe`
-2. Start app:
+### 6. Running App &#x1F680;
 
 ```
-node app.js
+nodemon app.js
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
