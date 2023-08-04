@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![YelpCamp Screenshot][yelp-camp-screenshot]
+![GoHiking Screenshot][GoHiking-screenshot]
 
 </div>
 
@@ -18,9 +18,8 @@ This is a project to learn and practice full stack web development. Project orig
     </li>
     <li><a href="#features-">Features</a></li>
     <li>
-      <a href="#getting-started-">Getting Started</a>
+      <a href="#getting-started-">Getting Started & Running App</a>
     </li>
-    <li><a href="#running-app-">Running App</a></li>
     <li><a href="#contact-">Contact</a></li>
     <li><a href="#acknowlegements-">Acknowledgments</a></li>
   </ol>
@@ -107,8 +106,6 @@ Copy the user's `ObjectID` from above and paste into `seeds/index.js` under auth
 node seeds/index.js
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### 6. Running App &#x1F680;
 
 ```
@@ -141,7 +138,7 @@ Big thanks to [Colt Steele][colt-url] in putting in the time and effort to creat
 
 <!-- Links & Images -->
 
-[yelp-camp-screenshot]: images/yelp-camp-screenshot.png "Screenshot of YelpCamp app"
+[GoHiking-screenshot]: images/GoHiking_home_page.jpg "Screenshot of GoHiking app"
 [colt-url]: https://www.udemy.com/user/coltsteele/
 [HTML-shield]: https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white
 [HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
