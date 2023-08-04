@@ -28,7 +28,7 @@ router
     isLoggedIn,
     isAuthor,
     upload.array("image"),
-    // validateHikingTrail,
+    validateHikingTrail,
     catchAsync(hikingtrails.updateHikingTrail)
   )
   .delete(isLoggedIn, isAuthor, catchAsync(hikingtrails.deleteHikingTrail));
