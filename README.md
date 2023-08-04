@@ -44,11 +44,19 @@ This is a project to learn and practice full-stack web development. Project orig
 
 ## Features &#x2B50;
 
-🚩 Interactive Map: Discover camping sites near you or explore new destinations with our user-friendly map interface.
-🏕️ Campground Listings: Find detailed information and honest reviews of various campgrounds to plan your perfect getaway.
-📸 Photo Gallery: Browse stunning images captured by fellow campers to get a glimpse of the breathtaking beauty that awaits.
+#### 1. Interactive Map
+
+Display hiking trail clusters on map.
+Convenient for users explore new destinations around them.
+![InteractiveMap Screenshot][InteractiveMap-screenshot]
+
+#### 2. User Authentication and Authorization
+
 🔐 User Authentication: Safeguard your YelpCamp experience with secure user authentication to protect your profile and ensure a trusted community.
 🔑 Authorization: Enjoy personalized access levels and permissions to ensure a safe and respectful environment for all users.
+
+🏕️ Campground Listings: Find detailed information and honest reviews of various campgrounds to plan your perfect getaway.
+📸 Photo Gallery: Browse stunning images captured by fellow campers to get a glimpse of the breathtaking beauty that awaits.
 
 ## Getting Started & Running App &#x1F680;
 
@@ -131,6 +139,7 @@ Big thanks to [Colt Steele][colt-url] in putting in the time and effort to creat
 <!-- Links & Images -->
 
 [GoHiking-screenshot]: images/GoHiking_home_page.jpg "Screenshot of GoHiking app"
+[InteractiveMap-screenshot]: images/GoHiking_interactive_map.jpg "Screenshot of Interactive Map"
 [colt-url]: https://www.udemy.com/user/coltsteele/
 [HTML-shield]: https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white
 [HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
