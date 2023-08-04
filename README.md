@@ -11,7 +11,7 @@ Live Version: https://gohiking2-882a8fb449f2.herokuapp.com/
 
 This is a project to learn and practice full-stack web development. Project originated from [Colt Steele's][colt-url] [course](https://www.udemy.com/course/the-web-developer-bootcamp/).
 
-<details>
+<!-- <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -23,12 +23,9 @@ This is a project to learn and practice full-stack web development. Project orig
     </li>
     <li><a href="#acknowlegements-">Acknowledgments</a></li>
   </ol>
-</details>
+</details> -->
 
-## Built With &#x1F4BB;
-
-<div align="center">
-
+Built With
 [![HTML5][HTML-shield]][HTML-url]
 [![CSS3][CSS-shield]][CSS-url]
 [![JavaScript][JavaScript-shield]][JavaScript-url]
@@ -38,16 +35,13 @@ This is a project to learn and practice full-stack web development. Project orig
 [![Bootstrap][Bootstrap-shield]][Bootstrap-url]
 [![Render][Render-shield]][Render-url]
 
-</div>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Features &#x2B50;
 
 #### 1. Interactive Map
 
-Display hiking trail clusters on map.
-Convenient for users explore new destinations around them.
+🗺️ Display hiking trail clusters on map.
+
+🗺️ Convenient for users explore new destinations around them.
 ![InteractiveMap Screenshot][InteractiveMap-screenshot]
 
 #### 2. User Authentication and Authorization
