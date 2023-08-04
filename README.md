@@ -63,6 +63,14 @@ Built with:
 
 ![CRUD Screenshot][CRUD-screenshot]
 
+#### 4. Rating Hiking Trail
+
+<ul>
+    <li>Allow users to post reviews for the trail and rate it.</li>
+</ul>
+
+![Rate Screenshot][Rate-screenshot]
+
 ## Getting Started & Running App &#x1F680;
 
 #### 1. Clone the repo
@@ -147,6 +155,7 @@ Big thanks to [Colt Steele][colt-url] in putting in the time and effort to creat
 [InteractiveMap-screenshot]: images/GoHiking_interactive_map.jpg "Screenshot of Interactive Map"
 [Auth-screenshot]: images/GoHiking_authentication&authorization.png "Screenshot of Auth"
 [CRUD-screenshot]: images/GoHiking_CRUD.png "Screenshot of CRUD"
+[Rate-screenshot]: images/GoHiking_rate.jpg "Screenshot of Rate"
 [colt-url]: https://www.udemy.com/user/coltsteele/
 [HTML-shield]: https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white
 [HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
