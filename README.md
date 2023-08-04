@@ -8,7 +8,7 @@
 
 </div>
 
-This is a project to learn and practice full stack web development. Project originated from [Colt Steele's][colt-url] [course](https://www.udemy.com/course/the-web-developer-bootcamp/).
+This is a project to learn and practice full-stack web development. Project originated from [Colt Steele's][colt-url] [course](https://www.udemy.com/course/the-web-developer-bootcamp/).
 
 <details>
   <summary>Table of Contents</summary>
@@ -25,7 +25,7 @@ This is a project to learn and practice full stack web development. Project orig
   </ol>
 </details>
 
-# Built With &#x1F3D7;
+## Built With &#x1F4BB;
 
 <div align="center">
 
@@ -42,15 +42,17 @@ This is a project to learn and practice full stack web development. Project orig
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Getting Started &#x1F4BB;
+## Features &#x2B50;
 
-### 1. Clone the repo
+## Getting Started & Running App &#x1F680;
+
+#### 1. Clone the repo
 
 ```
 git clone https://github.com/YXShang97/GoHiking.git
 ```
 
-### 2. Install NPM packages in project directory
+#### 2. Install NPM packages in project directory
 
 ```
 cd GoHiking
@@ -63,7 +65,7 @@ If vulnerabilities are found when packages are installed, run:
 npm audit fix
 ```
 
-### 3. Create environment variables
+#### 3. Create environment variables
 
 In home directory, create `.env` file with the below environment variables and input your API keys an MongoDB URL if using MongoDB Atlas.
 
@@ -83,7 +85,7 @@ DB_URL=
 SECRET=
 ```
 
-### 4. Create initial database user
+#### 4. Create initial database user
 
 Start the app and open the default (http://localhost:3000) to register an initial user.
 
@@ -98,7 +100,7 @@ use hiking-trail
 db.users.find()
 ```
 
-### 5. Seed database
+#### 5. Seed database
 
 Copy the user's `ObjectID` from above and paste into `seeds/index.js` under author so all of your seeded hikingtrails have an author.
 
@@ -106,7 +108,7 @@ Copy the user's `ObjectID` from above and paste into `seeds/index.js` under auth
 node seeds/index.js
 ```
 
-### 6. Running App &#x1F680;
+#### 6. Running App
 
 ```
 nodemon app.js
@@ -114,15 +116,9 @@ nodemon app.js
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Contact &#x2709;
+## Contact &#x2709;
 
-Feel free to reach out!
-
-<div align="center">
-
-[![LinkedIn][LinkedIn-shield]][LinkedIn-url]
-
-</div>
+Feel free to reach out![![LinkedIn][LinkedIn-shield]][LinkedIn-url]
 
 Live Version: https://gohiking2-882a8fb449f2.herokuapp.com/
 
@@ -130,7 +126,7 @@ Project Repo: https://github.com/YXShang97/GoHiking.git
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# Acknowlegements &#x1F64C;
+## Acknowlegements &#x1F64C;
 
 Big thanks to [Colt Steele][colt-url] in putting in the time and effort to creating such a robust web dev course.
 
