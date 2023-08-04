@@ -60,6 +60,7 @@ Built with:
 <ul>
     <li>Collect and display latest and detailed information of hiking trails.</li>
 </ul>
+
 ![CRUD Screenshot][CRUD-screenshot]
 
 ## Getting Started & Running App &#x1F680;
