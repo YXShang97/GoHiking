@@ -1,11 +1,12 @@
 <% layout('layouts/boilerplate')%>
-<div id="map" style="width: 100%; height: 500px"></div>
+<div id="cluster-map"></div>
 <h1>All Hiking Trails</h1>
 <div>
   <a href="/hikingtrails/new">Add Hiking Trail</a>
 </div>
+
 <% for (let hikingtrail of hikingtrails){%>
-<div class="card" mb-3>
+<div class="card mb-3">
   <div class="row">
     <div class="col-md-4">
       <%if(hikingtrail.images.length) {%>
