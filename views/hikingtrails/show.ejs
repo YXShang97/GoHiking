@@ -76,11 +76,11 @@
   <div class="col-6">
     <div id="map"></div>
     <% if(currentUser){ %>
-    <h2>Leave a Review</h2>
+    <h5 class="text-muted mt-3">Rating Your Experience</h5>
     <form
       action="/hikingtrails/<%=hikingtrail._id%>/reviews"
       method="POST"
-      class="mb-3 validated-form"
+      class="validated-form"
       novalidate
     >
       <!-- <div class="mb-3">
@@ -109,7 +109,7 @@
         <label for="first-rate5" title="Amazing">5 stars</label>
       </fieldset>
       <div class="mb-3">
-        <label class="form-label" for="body">Review</label>
+        <label class="form-label" for="body"></label>
         <textarea
           class="form-control"
           name="review[body]"

@@ -57,8 +57,10 @@ Built with:
 
 #### 3. Create/Edit/Delete Hiking Trail
 
-🏕️ Campground Listings: Find detailed information and honest reviews of various campgrounds to plan your perfect getaway.
-📸 Photo Gallery: Browse stunning images captured by fellow campers to get a glimpse of the breathtaking beauty that awaits.
+<ul>
+    <li>Collect and display latest and detailed information of hiking trails.</li>
+</ul>
+![CRUD Screenshot][CRUD-screenshot]
 
 ## Getting Started & Running App &#x1F680;
 
@@ -143,6 +145,7 @@ Big thanks to [Colt Steele][colt-url] in putting in the time and effort to creat
 [GoHiking-screenshot]: images/GoHiking_home_page.jpg "Screenshot of GoHiking app"
 [InteractiveMap-screenshot]: images/GoHiking_interactive_map.jpg "Screenshot of Interactive Map"
 [Auth-screenshot]: images/GoHiking_authentication&authorization.png "Screenshot of Auth"
+[CRUD-screenshot]: images/GoHiking_CRUD.png "Screenshot of CRUD"
 [colt-url]: https://www.udemy.com/user/coltsteele/
 [HTML-shield]: https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white
 [HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
