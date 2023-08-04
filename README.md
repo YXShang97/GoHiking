@@ -25,6 +25,7 @@ This is a project to learn and practice full-stack web development. Project orig
   </ol>
 </details> -->
 
+Built with:
 [![HTML5][HTML-shield]][HTML-url]
 [![CSS3][CSS-shield]][CSS-url]
 [![JavaScript][JavaScript-shield]][JavaScript-url]
@@ -43,15 +44,18 @@ This is a project to learn and practice full-stack web development. Project orig
     <li>Convenient for users explore new destinations around them.</li>
 </ul>
 
-🗺️
-
-🗺️
 ![InteractiveMap Screenshot][InteractiveMap-screenshot]
 
 #### 2. User Authentication and Authorization
 
-🔐 User Authentication: Safeguard your YelpCamp experience with secure user authentication to protect your profile and ensure a trusted community.
-🔑 Authorization: Enjoy personalized access levels and permissions to ensure a safe and respectful environment for all users.
+<ul>
+    <li>Safeguard your GoHiking experience with secure user authentication to protect your profile and ensure a trusted community.</li>
+    <li>Strictly limit Create/Edit/Delete permissions to ensure a safe and respectful environment for all users.</li>
+</ul>
+
+![Auth Screenshot][Auth-screenshot]
+
+#### 3. Create/Edit/Delete Hiking Trail
 
 🏕️ Campground Listings: Find detailed information and honest reviews of various campgrounds to plan your perfect getaway.
 📸 Photo Gallery: Browse stunning images captured by fellow campers to get a glimpse of the breathtaking beauty that awaits.
@@ -138,6 +142,7 @@ Big thanks to [Colt Steele][colt-url] in putting in the time and effort to creat
 
 [GoHiking-screenshot]: images/GoHiking_home_page.jpg "Screenshot of GoHiking app"
 [InteractiveMap-screenshot]: images/GoHiking_interactive_map.jpg "Screenshot of Interactive Map"
+[Auth-screenshot]: images/GoHiking_authentication&authorization.png "Screenshot of Auth"
 [colt-url]: https://www.udemy.com/user/coltsteele/
 [HTML-shield]: https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white
 [HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
