@@ -7,6 +7,7 @@
 ![GoHiking Screenshot][GoHiking-screenshot]
 
 </div>
+Live Version: https://gohiking2-882a8fb449f2.herokuapp.com/
 
 This is a project to learn and practice full-stack web development. Project originated from [Colt Steele's][colt-url] [course](https://www.udemy.com/course/the-web-developer-bootcamp/).
 
@@ -20,7 +21,6 @@ This is a project to learn and practice full-stack web development. Project orig
     <li>
       <a href="#getting-started-">Getting Started & Running App</a>
     </li>
-    <li><a href="#contact-">Contact</a></li>
     <li><a href="#acknowlegements-">Acknowledgments</a></li>
   </ol>
 </details>
@@ -43,6 +43,12 @@ This is a project to learn and practice full-stack web development. Project orig
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Features &#x2B50;
+
+🚩 Interactive Map: Discover camping sites near you or explore new destinations with our user-friendly map interface.
+🏕️ Campground Listings: Find detailed information and honest reviews of various campgrounds to plan your perfect getaway.
+📸 Photo Gallery: Browse stunning images captured by fellow campers to get a glimpse of the breathtaking beauty that awaits.
+🔐 User Authentication: Safeguard your YelpCamp experience with secure user authentication to protect your profile and ensure a trusted community.
+🔑 Authorization: Enjoy personalized access levels and permissions to ensure a safe and respectful environment for all users.
 
 ## Getting Started & Running App &#x1F680;
 
@@ -113,16 +119,6 @@ node seeds/index.js
 ```
 nodemon app.js
 ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Contact &#x2709;
-
-Feel free to reach out![![LinkedIn][LinkedIn-shield]][LinkedIn-url]
-
-Live Version: https://gohiking2-882a8fb449f2.herokuapp.com/
-
-Project Repo: https://github.com/YXShang97/GoHiking.git
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
