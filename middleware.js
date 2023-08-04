@@ -20,6 +20,7 @@ module.exports.storeReturnTo = (req, res, next) => {
 };
 
 module.exports.validateHikingTrail = (req, res, next) => {
+  console.log("in");
   const { error } = hikingtrailSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
