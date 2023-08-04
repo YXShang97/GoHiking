@@ -25,7 +25,6 @@ This is a project to learn and practice full-stack web development. Project orig
   </ol>
 </details> -->
 
-Built With
 [![HTML5][HTML-shield]][HTML-url]
 [![CSS3][CSS-shield]][CSS-url]
 [![JavaScript][JavaScript-shield]][JavaScript-url]
@@ -39,9 +38,14 @@ Built With
 
 #### 1. Interactive Map
 
-🗺️ Display hiking trail clusters on map.
+<ul>
+    <li>Display hiking trail clusters on map.</li>
+    <li>Convenient for users explore new destinations around them.</li>
+</ul>
 
-🗺️ Convenient for users explore new destinations around them.
+🗺️
+
+🗺️
 ![InteractiveMap Screenshot][InteractiveMap-screenshot]
 
 #### 2. User Authentication and Authorization
