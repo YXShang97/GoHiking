@@ -73,6 +73,40 @@ Built with:
 
 ## Getting Started & Running App &#x1F680;
 
+### Prerequisites
+
+#### Node.js & NPM
+
+Install Node.js with NPM from its [website](https://nodejs.org/).
+
+Once installed, check Node version:
+
+```
+node --version
+```
+
+Check npm version:
+
+```
+npm --version
+```
+
+#### MongoDB
+
+Install MongoDB and MongoDB Shell (`mongosh`) from its [website](https://www.mongodb.com/).
+
+#### Cloudinary API Key
+
+[Cloudinary](https://cloudinary.com/) is used for image storage. Sign up for an free-tier account to receive an API key.
+
+#### Mapbox API Key
+
+[Mapbox](https://www.mapbox.com/) is used for a cluster map and individual campground maps. Sign up for an free-tier account to receive an API key.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Installation
+
 #### 1. Clone the repo
 
 ```
